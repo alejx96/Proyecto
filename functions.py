@@ -3,7 +3,7 @@ import pandas as pd
 '''Edad'''
 def clasificar_edad(edad):
     if edad < 13:
-        return 'Nino'
+        return 'Niño'
     elif 13 <= edad < 18:
         return 'Adolescente'
     elif 18 <= edad < 65:
