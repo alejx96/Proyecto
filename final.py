@@ -20,4 +20,4 @@ dfnew['insulina'] = df['valor_insulina'].apply(func.clasificar_insulina)
 
 print(dfnew)
 
-dfnew.to_csv('test.csv',index=False,encoding='utf-8')
+# dfnew.to_csv('test.csv',index=False,encoding='utf-8')
