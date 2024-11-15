@@ -266,4 +266,102 @@ plt.ylabel('Porcentaje')
 plt.legend(loc='best')
 plt.tight_layout()
 plt.show()
-dfnew.to_csv('test.csv',index=False,encoding='utf-8')
+# ------------------------------------------------------------------------------------
+
+plt.figure(figsize=(16,10))
+#estudio Adulto Mayor
+dfAmayor = dfnew[dfnew['edad'].isin(['Adulto Mayor'])]
+#Glucosa
+dfAmayorCol = dfAmayor.pivot_table(index='presion_arterial',columns=['colesterol'],aggfunc='size',fill_value=0)
+dfAmayorCol = round(dfAmayorCol.div(dfAmayorCol.sum(axis=1),axis=0)*100,2)
+
+dfAmayorGls = dfAmayor.pivot_table(index='presion_arterial',columns=['glucosa'],aggfunc='size',fill_value=0)
+dfAmayorGls = round(dfAmayorGls.div(dfAmayorGls.sum(axis=1),axis=0)*100,2)
+print(dfAmayorGls)
+columns = dfAmayorGls.columns.tolist()[0:]
+colors = ['#ff335e', '#335eff', '#4cb274']
+barWidth = 0.25
+
+br1 = np.arange(dfAmayorGls.shape[0]) - barWidth
+br2 = br1 + barWidth
+br3 = br2 + barWidth
+brs = [br1, br2, br3]
+print(br1)
+
+plt.subplot(2, 2, 1)
+for br, color, col_name in zip(brs, colors, columns):
+    print(br,col_name)
+    plt.bar(br, dfAmayorGls[col_name], width=barWidth, color=color, label=col_name)
+
+
+plt.xticks(br2, dfnew.groupby('presion_arterial').groups.keys())
+
+ax = plt.gca()
+for br, color, col_name in zip(brs, colors, columns):
+    for j, v in enumerate(dfAmayorGls[col_name].values):
+        ax.text(br[j]-barWidth*0.5, v+1, f'{v:,.2f}', color=color, fontweight='bold',fontsize=8)
+
+plt.title('Glucosa Adulto Mayor')
+plt.legend(loc='best')
+
+#estudio Adulto Mayor Insulina
+dfAmayorGls = dfAmayor.pivot_table(index='presion_arterial',columns=['insulina'],aggfunc='size',fill_value=0)
+dfAmayorGls = round(dfAmayorGls.div(dfAmayorGls.sum(axis=1),axis=0)*100,2)
+print(dfAmayorGls)
+columns = dfAmayorGls.columns.tolist()[0:]
+colors = ['#ff335e', '#335eff', '#4cb274']
+barWidth = 0.25
+
+br1 = np.arange(dfAmayorGls.shape[0]) - barWidth
+br2 = br1 + barWidth
+br3 = br2 + barWidth
+brs = [br1, br2, br3]
+print(br1)
+
+plt.subplot(2, 2, 2)
+for br, color, col_name in zip(brs, colors, columns):
+    print(br,col_name)
+    plt.bar(br, dfAmayorGls[col_name], width=barWidth, color=color, label=col_name)
+
+
+plt.xticks(br2, dfnew.groupby('presion_arterial').groups.keys())
+
+ax = plt.gca()
+for br, color, col_name in zip(brs, colors, columns):
+    for j, v in enumerate(dfAmayorGls[col_name].values):
+        ax.text(br[j]-barWidth*0.5, v+1, f'{v:,.2f}', color=color, fontweight='bold',fontsize=8)
+
+plt.title('Insulina Adulto Mayor')
+plt.legend(loc='best')
+
+#estudio Adulto Mayor Sueno
+dfAmayorGls = dfAmayor.pivot_table(index='presion_arterial',columns=['sueno'],aggfunc='size',fill_value=0)
+dfAmayorGls = round(dfAmayorGls.div(dfAmayorGls.sum(axis=1),axis=0)*100,2)
+print(dfAmayorGls)
+columns = dfAmayorGls.columns.tolist()[0:]
+colors = ['#ff335e', '#335eff', '#4cb274']
+barWidth = 0.25
+
+br1 = np.arange(dfAmayorGls.shape[0]) - barWidth
+br2 = br1 + barWidth
+br3 = br2 + barWidth
+brs = [br1, br2, br3]
+print(br1)
+
+plt.subplot(2, 2, 3)
+for br, color, col_name in zip(brs, colors, columns):
+    print(br,col_name)
+    plt.bar(br, dfAmayorGls[col_name], width=barWidth, color=color, label=col_name)
+
+
+plt.xticks(br2, dfnew.groupby('presion_arterial').groups.keys())
+
+ax = plt.gca()
+for br, color, col_name in zip(brs, colors, columns):
+    for j, v in enumerate(dfAmayorGls[col_name].values):
+        ax.text(br[j]-barWidth*0.5, v+1, f'{v:,.2f}', color=color, fontweight='bold',fontsize=8)
+
+plt.title('Sueño Adulto Mayor')
+plt.legend(loc='best')
+plt.show()
+# dfnew.to_csv('test.csv',index=False,encoding='utf-8')
