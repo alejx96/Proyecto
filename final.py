@@ -19,6 +19,7 @@ dfnew['creatina'] = df.apply(lambda x: func.clasificar_creatina(x['valor_creatin
 dfnew['glucosa'] = df['resultado_glucosa'].apply(func.clasificar_glucosa)
 dfnew['trigliceridos'] = df['valor_trigliceridos'].apply(func.clasificar_trigliceridos)
 dfnew['insulina'] = df['valor_insulina'].apply(func.clasificar_insulina)
+dfnew['presion_arterial'] = df['tension_arterial'].apply(func.clasifica_tension_arterial)
 
 print(dfnew)
 
@@ -205,4 +206,6 @@ for br, color, col_name in zip(brs, colors, columns):
 plt.title('Insulina por Edad')
 plt.legend(loc='best')
 plt.show()
+
+
 # dfnew.to_csv('test.csv',index=False,encoding='utf-8')

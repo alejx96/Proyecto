@@ -65,3 +65,14 @@ def clasificar_insulina(valor):
         return 'Normal'
     else:
         return 'Fuera de rango'
+
+'''Tension arterial'''
+def clasifica_tension_arterial(valor):
+    if valor <= 120:
+        return 'Presion Normal'
+    elif 120 > valor <= 129:
+        return 'Presion Alta'
+    elif 129 > valor <= 139:
+        return 'Hipertension Etapa 1'
+    else:
+        return 'Hipertension Etapa 2'
