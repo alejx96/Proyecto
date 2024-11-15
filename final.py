@@ -240,3 +240,30 @@ plt.title('Presion Arterial por Edad')
 plt.legend(loc='best')
 plt.show()
 # dfnew.to_csv('test.csv',index=False,encoding='utf-8')
+
+#Sueño
+dfnew['sueno'] = df['sueno_horas'].apply(lambda x: 'Suficiente' if x >= 8 else 'Insuficiente')
+dfSueno = dfnew.pivot_table(index='edad', columns='sueno', aggfunc='size', fill_value=0)
+dfSueno = round(dfSueno.div(dfSueno.sum(axis=1), axis=0) * 100, 2)
+
+columns = dfSueno.columns.tolist()
+colors = ['#4caf50', '#f44336']  # Colores para 'Suficiente' e 'Insuficiente'
+barWidth = 0.35
+br1 = np.arange(dfSueno.shape[0]) - barWidth / 2
+br2 = br1 + barWidth
+
+plt.figure(figsize=(10, 6))
+for br, color, col_name in zip([br1, br2], colors, columns):
+    plt.bar(br, dfSueno[col_name], width=barWidth, color=color, label=col_name)
+
+plt.xticks(br1 + barWidth / 2, dfSueno.index, rotation=45)
+ax = plt.gca()
+for br, color, col_name in zip([br1, br2], colors, columns):
+    for j, v in enumerate(dfSueno[col_name].values):
+        ax.text(br[j] - barWidth * 0.25, v + 1, f'{v:,.2f}%', color=color, fontweight='bold', fontsize=8)
+
+plt.title('Clasificación de Sueño por Edad')
+plt.ylabel('Porcentaje')
+plt.legend(loc='best')
+plt.tight_layout()
+plt.show()
