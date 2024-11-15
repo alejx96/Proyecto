@@ -239,7 +239,6 @@ for br, color, col_name in zip(brs, colors, columns):
 plt.title('Presion Arterial por Edad')
 plt.legend(loc='best')
 plt.show()
-# dfnew.to_csv('test.csv',index=False,encoding='utf-8')
 
 #Sueño
 dfnew['sueno'] = df['sueno_horas'].apply(lambda x: 'Suficiente' if x >= 8 else 'Insuficiente')
@@ -267,3 +266,4 @@ plt.ylabel('Porcentaje')
 plt.legend(loc='best')
 plt.tight_layout()
 plt.show()
+dfnew.to_csv('test.csv',index=False,encoding='utf-8')
