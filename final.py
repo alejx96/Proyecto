@@ -21,6 +21,14 @@ dfnew['trigliceridos'] = df['valor_trigliceridos'].apply(func.clasificar_triglic
 dfnew['insulina'] = df['valor_insulina'].apply(func.clasificar_insulina)
 dfnew['presion_arterial'] = df['tension_arterial'].apply(func.clasifica_tension_arterial)
 
+
+# Elimina las filas con presión baja
+def eliminar_presion_baja(df, columna):
+    condiciones_baja = ['Presion Baja']  # Ajusta los criterios según sea necesario
+    df_filtrado = df[~df[columna].isin(condiciones_baja)]
+    return df_filtrado
+
+
 print(dfnew)
 
 # Acido Urico
@@ -365,3 +373,9 @@ plt.title('Sueño Adulto Mayor')
 plt.legend(loc='best')
 plt.show()
 # dfnew.to_csv('test.csv',index=False,encoding='utf-8')
+
+# Filtrar los datos para eliminar presión baja
+dfnew = eliminar_presion_baja(dfnew, 'presion_arterial')
+
+# Guardar DataFrame limpio en un nuevo CSV
+dfnew.to_csv('New_Hipertension_Arterial.csv', index=False, encoding='utf-8')

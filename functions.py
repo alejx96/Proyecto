@@ -68,8 +68,10 @@ def clasificar_insulina(valor):
 
 '''Tension arterial'''
 def clasifica_tension_arterial(valor):
-    if valor <= 120:
-        return 'Presion Normal'
+    if valor < 90:
+        return 'Presion Baja'
+    elif 90 < valor <=120:
+        return 'Preson Normal'
     elif 120 > valor <= 129:
         return 'Presion Alta'
     elif 129 > valor <= 139:
